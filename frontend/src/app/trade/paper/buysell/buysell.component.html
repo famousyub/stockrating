@@ -1,0 +1,105 @@
+<div class="wrapper" fxLayout="column">
+  <div class="title-wrapper" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="title" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="5px">
+      <input matInput
+             placeholder="Symbol"
+             [matAutocomplete]="auto"
+             name="symbol"
+             #symbol="ngModel"
+             [(ngModel)]="searchSymbol"
+             (ngModelChange)="doFilter()"
+      >
+      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
+        <mat-option *ngFor="let symbol of autoSymbols" [value]="symbol.symbol" (click) = "selectSymbol(symbol)">
+          <div class="symbols">
+            <h4>{{symbol.symbol}}</h4>
+            <h5>{{symbol.name | uppercase}}</h5>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+    <div *ngIf="showMatched" fxLayout="row" fxLayoutAlign="center center">
+      <p style="width: max-content; margin: 0 20px 0 0">Price in the next 15s: </p>
+      <p style="width: max-content; margin: 0">{{matchedPrice | currency}}</p>
+    </div>
+    <div *ngIf="!showMatched" fxLayout="row" fxLayoutAlign="center center">
+      <button (click)="showMatchedPrice()" mat-button>Show matched price</button>
+    </div>
+  </div>
+  <div class="body-wrapper">
+    <div class="body">
+      <div *ngIf="dailyBidAsk != null" class="bid-ask">
+        <div class="bid-ask-wrapper" fxLayout="row">
+          <div class="bid">Bid {{dailyBidAsk.bid | number : '1.2-2'}}</div>
+          <div class="diff" fxLayout="row">
+            <div class="half-bid"></div>
+            <div class="half-ask"></div>
+            <div class="diff-price">{{dailyBidAsk.spread | number: '1.2-2'}}</div>
+          </div>
+          <div class="ask">Ask {{dailyBidAsk.ask | number : '1.2-2'}}</div>
+        </div>
+      </div>
+
+      <div class="side">
+        <h6>Side</h6>
+        <div class="buy-sell-button" fxLayout="row" fxLayoutGap="3px">
+          <div (click)="selectBuy()" [ngClass]="[order.orderSide==='BUY'?'selected-buy':'buy',order.orderSide==='SELL'?'buy-when-sell-selected':'buy']"
+               class="buy">
+            BUY
+          </div>
+          <div (click)="selectSell()" [ngClass]="[order.orderSide==='SELL'?'selected-sell':'sell',order.orderSide==='BUY'?'sell-when-buy-selected':'sell']"
+               class="sell">
+            SELL
+          </div>
+        </div>
+      </div>
+
+      <div class="type-quantity-wrapper" fxLayout="row">
+        <div class="type">
+          <h6>Order Type</h6>
+          <mat-select [(ngModel)]="order.orderType">
+            <mat-option value="LIMIT">LIMIT</mat-option>
+            <mat-option value="MARKET">MARKET</mat-option>
+          </mat-select>
+        </div>
+        <div class="quantity">
+          <h6>Quantity</h6>
+          <input [(ngModel)]="order.filledQuantity" matInput placeholder="0">
+        </div>
+      </div>
+
+      <div class="limit-price">
+        <h6>Limit price</h6>
+        <input [(ngModel)]="order.limitPrice" matInput *ngIf="order.orderType!='MARKET'">
+        <input *ngIf="order.orderType==='MARKET'" value="0" placeholder="0" class="market-price" readonly>
+      </div>
+
+      <div class="time-hour-wrapper" fxLayout="row">
+        <div class="time">
+          <h6>Time-in-Force</h6>
+          <div class="day-input">Day</div>
+        </div>
+        <div class="hours">
+          <h6>Extended Hours</h6>
+          <div class="hours-input">No</div>
+        </div>
+      </div>
+      <div (click)="submit()" class="paper-trade">
+        <button [ngClass]="{sellBtn: order.orderSide==='SELL',buyBtn: order.orderSide==='BUY'}" color="primary"
+                mat-raised-button>Paper Trade
+        </button>
+      </div>
+      <div class="summary">
+        <div class="amount" fxLayout="row" fxLayoutAlign="space-between">
+          <h6>Amount(est.)</h6>
+          <h6>{{amount | currency}}</h6>
+        </div>
+        <div class="buying-power" fxLayout="row" fxLayoutAlign="space-between">
+          <h6>Buying Power</h6>
+          <h6>{{buyingPower | currency}}</h6>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

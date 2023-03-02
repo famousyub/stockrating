@@ -1,0 +1,26 @@
+form{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+mat-form-field{
+  margin-bottom: 25px!important;
+}
+
+.mat-raised-button{
+  border-radius: 50px;
+  margin-bottom: 40px;
+}
+
+.h3-wrapper{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}

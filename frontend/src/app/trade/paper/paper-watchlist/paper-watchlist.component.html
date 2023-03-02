@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="title-wrapper">
+    <p>Watchlist</p>
+  </div>
+  <div class="body">
+    <div *ngIf="selectedWatchlist!=null" class="body-wrapper">
+      <mat-select (selectionChange)="updateWatchlistWS($event)" placeholder={{selectedWatchlist.name}}>
+        <mat-option *ngFor="let wl of watchlists" value={{wl.name}}>{{wl.name}}</mat-option>
+      </mat-select>
+      <div *ngIf="!loading" class="symbols-wrapper">
+        <div class="title-symbols" fxLayout="row" fxLayoutAlign="space-between">
+          <p>Name</p>
+          <p>Price/Change</p>
+        </div>
+        <div *ngFor="let daily of dailies">
+          <div class="symbols">
+            <div class="symbol" fxLayout="row" fxLayoutAlign="space-between">
+              <p>{{daily.symbol}}</p>
+              <p [ngClass]="(daily.changeInPercent >=0)?'increasing':'decreasing'">{{daily.price | currency}}</p>
+            </div>
+            <div class="platform" fxLayout="row" fxLayoutAlign="space-between">
+              <h6>NASDAQ</h6>
+              <div clas="change" fxLayout="row" fxLayoutGap="10px">
+                <h6 *ngIf="daily.change < 0"
+                    [ngClass]="(daily.changeInPercent >=0)?'increasing':'decreasing'">{{daily.change | number : '1.2-2'}}</h6>
+                <h6 *ngIf="daily.change >= 0" [ngClass]="(daily.changeInPercent >=0)?'increasing':'decreasing'">
+                  +{{daily.change | number : '1.2-2'}}</h6>
+                <h6 *ngIf="daily.changeInPercent < 0"
+                    [ngClass]="(daily.changeInPercent >=0)?'increasing':'decreasing'">{{daily.changeInPercent}}%</h6>
+                <h6 *ngIf="daily.changeInPercent >= 0"
+                    [ngClass]="(daily.changeInPercent >=0)?'increasing':'decreasing'">+{{daily.changeInPercent}}%</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

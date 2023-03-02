@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="title-wrapper">
+    <div class="title">
+      <p>Paper Account Details</p>
+    </div>
+  </div>
+  <div *ngIf="account!=null" class="body-wrapper">
+    <div class="body">
+      <div class="text-wrapper" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <p class="title-p">Net Account Value</p>
+          <p>{{account.netAccountValue | currency}}</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <p class="title-p">Overall P&L</p>
+          <div fxLayout="row" fxLayoutGap="10px">
+            <p>{{account.overallPL  | number : '1.2-2'}}</p>
+            <p  *ngIf="account.PLChange!=null">{{account.PLChange | number:'1.2-2'}}%</p>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <p class="title-p">Market Value</p>
+          <p>{{account.marketValue | number : '1.2-2'}}</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <p class="title-p">Buying Power</p>
+          <p>{{account.buyingPower | number : '1.2-2'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="title-wrapper">
+    <div class="title" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="5px">
+      <input matInput
+             placeholder="Symbol"
+             [matAutocomplete]="auto"
+             name="symbol"
+             #symbol="ngModel"
+             [(ngModel)]="searchSymbol"
+             (ngModelChange)="doFilter()"
+      >
+      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
+        <mat-option *ngFor="let symbol of autoSymbols" [value]="symbol.symbol" (click) ="selectSymbol(symbol)">
+          <div class="symbols">
+            <h4>{{symbol.symbol}}</h4>
+            <h5>{{symbol.name | uppercase}}</h5>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+  <div class="body-wrapper">
+    <div class="title-chart" fxLayout="row" fxLayoutGap="20px">
+      <button (click)="setInterval(90)" [ngClass]="interval===90?'active':''" mat-flat-button>03 Months</button>
+      <button (click)="setInterval(180)" [ngClass]="interval===180?'active':''" mat-flat-button>06 Months</button>
+      <button (click)="setInterval(365)" [ngClass]="interval===365?'active':''" mat-flat-button>01 Year</button>
+      <button (click)="setInterval(1)" [ngClass]="interval===1?'active':''" mat-flat-button>Today</button>
+    </div>
+    <div class="body">
+      <div *ngIf="chartOptions!=null" id="chart">
+        <apx-chart
+          [chart]="chartOptions.chart"
+          [series]="chartOptions.series"
+          [title]="chartOptions.title"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
+</div>

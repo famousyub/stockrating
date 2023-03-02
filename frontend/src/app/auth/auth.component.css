@@ -1,0 +1,101 @@
+.wrapper{
+  width:100vw;
+  height: 100vh;
+  background: url("src/assets/background.jpg");
+  background-size: cover;
+  position: fixed;
+}
+
+h2{
+  margin-top: 20px;
+  font-size: 25px;
+}
+
+.img-wrapper{
+  width: 100%;
+  position: absolute;
+  left:5px;
+}
+
+.logofidcoin{
+  border-radius: 80px;
+  width: 7%;
+  height: 7%;
+}
+
+.form-wrapper{
+  margin-top: 165px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.form-container{
+  width: 50%;
+}
+
+.form-text{
+  border-radius: 5px;
+  background-color: #fff;
+  width: 50%;
+}
+
+:host ::ng-deep .mat-tab-body-content{
+  overflow: hidden !important;
+}
+
+@media (min-width: 0px){
+  .form-container{
+    width: 100%;
+    margin: 0 15vw 0 15vw;
+  }
+
+  .form-text{
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
+  }
+}
+
+@media (min-width: 478px){
+  .form-container{
+    margin: 0 20vw 0 20vw;
+  }
+}
+
+@media (min-width: 578px){
+  .form-container{
+    margin: 0 25vw 0 25vw;
+  }
+}
+
+@media (min-width: 823px){
+  .form-container{
+    margin: 0 30vw 0 30vw;
+  }
+}
+@media (min-width: 823px){
+  .form-container{
+    margin: 0 30vw 0 30vw;
+  }
+}
+@media (min-width: 1200px){
+  .form-container{
+    width: 60%;
+    margin:0;
+  }
+
+  .form-text{
+    width: 50%;
+  }
+}
+@media (min-width: 1400px){
+  .form-container{
+    width: 50%;
+    margin:0;
+  }
+
+  .form-text{
+    width: 50%;
+  }
+}
